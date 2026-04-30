@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "pwii-api-clientes",
   "version": "1.0.0",
   "description": "",
@@ -12,9 +13,22 @@
   },
   "license": "ISC",
   "author": "Gabriel",
+=======
+  "name": "aula-15-04-26",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Rafael Fr",
+>>>>>>> 66b8f7d (Segundo Commit)
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+<<<<<<< HEAD
+=======
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+>>>>>>> 66b8f7d (Segundo Commit)
   }
 }
