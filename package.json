@@ -1,34 +1,15 @@
 {
-<<<<<<< HEAD
-  "name": "pwii-api-clientes",
-  "version": "1.0.0",
-  "description": "",
-  "homepage": "https://github.com/gabrielcodeworks1-pixel/pwII-api-clientes#readme",
-  "bugs": {
-    "url": "https://github.com/gabrielcodeworks1-pixel/pwII-api-clientes/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gabrielcodeworks1-pixel/pwII-api-clientes.git"
-  },
-  "license": "ISC",
-  "author": "Gabriel",
-=======
   "name": "aula-15-04-26",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
-  "author": "Rafael Fr",
->>>>>>> 66b8f7d (Segundo Commit)
+  "author": "",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-<<<<<<< HEAD
-=======
   },
   "dependencies": {
     "express": "^5.2.1"
->>>>>>> 66b8f7d (Segundo Commit)
   }
 }
