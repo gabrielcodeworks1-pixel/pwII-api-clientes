@@ -1,6 +1,6 @@
 /*module.exports = app*/
 const express = require("express");
-const clientesRoutes = require("./src/routes/clienteRoutes");
+const clientesRoutes = require("./routes/clientesRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;

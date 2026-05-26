@@ -1,6 +1,7 @@
 // src/controllers/clienteController.js
 
-const clientes = require("../../data/clientes");
+const Cliente = require("../model/cliente");
+const clientes = require("../data/clientes");
 
 // GET /clientes — retorna todos os clientes
 /*const listarClientes = (req, res) => {
