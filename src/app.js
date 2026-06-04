@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 //Rota raiz
-
 app.get("/", (req, res) => {
     res.json({
         mensagem:"API de Clientes",
@@ -38,5 +37,11 @@ app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
     console.log(`\n🚀 Servidor rodando em http://localhost:${PORT}`);
 })
+
+process.on("SIGINT", async () => {
+    await prisma.$disconnect();
+    console.log("Conexão com o banco de dados encerrada.");
+    process.exit(0);
+});
 
 module.exports = app;

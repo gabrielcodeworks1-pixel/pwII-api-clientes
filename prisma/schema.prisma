@@ -1,4 +1,4 @@
-generetor client {
+generator client {
     provider = "prisma-client-js"
 }
 
@@ -8,10 +8,11 @@ datasource db {
 }
 
 model Client {
-    id Int @id default(autoincrement())
+    id Int @id @default(autoincrement())
     nome String 
     telefone String?
     endereco String?
+    //ativo Boolean @default(true)
 
     @@map("clientes")
 }
