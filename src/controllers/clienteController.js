@@ -1,7 +1,7 @@
 // src/controllers/clienteController.js
 
 const Cliente = require("../model/cliente");
-const clientes = require("../data/clientes");
+const prisma = require("../config/prisma");
 
 // GET /clientes — retorna todos os clientes
 /*const listarClientes = (req, res) => {
@@ -13,11 +13,12 @@ const clientes = require("../data/clientes");
 };*/
 
 const listarClientes = async (req, res) => {
+  const resultado = await prisma.cliente.findMany();
   try {
     return res.status(200).json({
       sucesso: true,
-      total: clientes.length,
-      dados: clientes,
+      total: resultado.length,
+      dados: resultado.map((c)=> ({id: c.id, nome: c.nome, telefone: c.telefone, endereco: c.endereco}))
     });
   } catch (error) {
     return res.status(500).json({
@@ -65,7 +66,9 @@ const buscarClientePorId = async (req, res) => {
       });
     }
 
-    const cliente = clientes.find((c) => c.id === id);
+    const cliente = await prisma.cliente.findUnique({
+    where: { id: id }
+  });
 
     if (!cliente) {
       return res.status(404).json({
@@ -91,18 +94,24 @@ const buscarClientePorId = async (req, res) => {
 const adicionarCliente = async(req, res) => {
   try{
     const {nome, telefone, endereco } = req.body;
-    const novo_cliente = new Cliente(
+    /*const novo_cliente = new Cliente(
       clientes.length + 1,
       nome,
       telefone,
       endereco
-    );
+    );*/
     clientes.push(novo_cliente);
     return res.status(201).json({
       sucesso: true,
       mensagem: "Usuario adicionado"
     });
-
+    const novo_cliente = await prisma.cliente.create({
+      data: {
+        nome: nome,
+        telefone: telefone,
+        endereco: endereco
+      }
+    });
   }catch(error){
     return res.status(500).json({
       sucesso: false,
