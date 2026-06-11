@@ -13,7 +13,9 @@ const prisma = require("../config/prisma");
 };*/
 
 const listarClientes = async (req, res) => {
-  const resultado = await prisma.cliente.findMany();
+  const resultado = await prisma.cliente.findMany({
+    where: { ativo: true }
+  });
   try {
     return res.status(200).json({
       sucesso: true,
@@ -125,19 +127,23 @@ const adicionarCliente = async(req, res) => {
 
 const atualizarCliente = async (req, res) => {
   try{
-    const {id} = req.params;
-    const {nome, telefone, endereco} = req.body
-    const cliente = clientes.find((c) => c.id == id);
+    const {id} = req.params; 
+    const {nome, telefone, endereco} = req.body;
+    const cliente = await prisma.cliente.findUnique({
+      where: { id: parseInt(Id) }
+    });
+  
     if(!cliente){
       return res.status(404).json({
         sucesso: false,
         messagem: `Clientes de id $(id) não encontrado`
       });
     } else {
-      cliente.nome = nome;
-      cliente.telefone = telefone;
-      cliente.endereco = endereco;
-
+      await prisma.cliente.update({
+        where: { id: parseInt(id) },
+        data: {nome, telefone, endereco},
+      });
+     
       return res.status(200).json({
         sucesso: true,
         mensagem: "Cliente atualizado"
@@ -156,16 +162,23 @@ const atualizarCliente = async (req, res) => {
 
 const deletarCliente = async(req, res) => {
   try{
-    const {id} = req.params;
-    const index = clientes.findIndex((c) => c.id == id);
 
-    if(index === -1){
+   const {id} = req.params;
+    const cliente = await prisma.cliente.findUnique({
+      where: { id: parseInt(id) }
+    });
+
+    if (!cliente) {
       return res.status(404).json({
         sucesso: false,
         mensagem: `Cliente de ${id} não encontrado`
-      })
+      });
+
     } else {
-      clientes.splice(index, 1);
+      await prisma.cliente.update({
+        where: { id: parseInt (id) },
+        data: { ativo: false }
+      });
       return res.status(200).json({
         sucesso: true,
         mensagem: `cliente com ${id} removido com sucesso`
